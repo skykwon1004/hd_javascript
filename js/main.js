@@ -55,7 +55,7 @@ const MAIN_VISUAL_SLIDE_OPTION = {
     // navigation: {
     //     nextEl: "#mainVisual .arrows>div:nth-child(1)",
     //     prevEl: "#mainVisual .arrows>div:nth-child(2)",
-    //   },
+    //   }, 버튼
     on: {
         slideChangeTransitionStart: function () {
             console.log(this, this.realIndex, MAIN_SLIDE_NAV_LI);
@@ -116,8 +116,6 @@ MAIN_SLIDE_NAV.addEventListener('click', MAIN_SLIDE_NAV_HANDLER);
 
 
 // mainPortfolio
-
-
 const PF_LEFT_SLIDE_OPTION = {
     loop: true,
     effect: 'fade',
@@ -128,21 +126,62 @@ const PF_LEFT_SLIDE_OPTION = {
     // autoplay: {
     //     delay: 3000,
     // },
+    navigation: {
+        nextEl: "#mainPortfolio .arrows li:nth-child(2)",
+        prevEl: "#mainPortfolio .arrows li:nth-child(1)",
+    },
 
 };
+
+
 const PF_LEFT_SLIDE = new Swiper('.pf_left_slide', PF_LEFT_SLIDE_OPTION);
-
-
 
 const PF_RIGHT_SLIDE_OPTION = {
     loop: true,
     slidesPerView: 5,
     spaceBetween: 20,
-    // thumbs: {
-    //     swiper: PF_LEFT_SLIDE,
-    // },
-};
+    slideToClickedSlide: true,
+}
 const PF_RIGHT_SLIDE = new Swiper('.pf_right_slide', PF_RIGHT_SLIDE_OPTION);
 
 PF_LEFT_SLIDE.controller.control = PF_RIGHT_SLIDE;
 PF_RIGHT_SLIDE.controller.control = PF_LEFT_SLIDE;
+
+
+
+
+// mainSolution
+const MS_CONTENT = document.querySelectorAll('#mainSolution .Ms_content .content');
+const MS_NUM = document.querySelector('#mainSolution .num');
+
+const MS_SLIDE_OPTION = {
+    loop: true,
+    spaceBetween: 100,
+    slidesPerView: "auto",
+    centeredSlides: true,
+    slideActiveClass: "on",
+    on: {
+        slideChangeTransitionStart: function () {
+            console.log(this.realIndex, this.slides.length);
+            let idx = this.realIndex;
+            let total = MS_CONTENT.length;
+            // for (let i = 0; i < MS_CONTENT.length; i++) {
+            //     MS_CONTENT[i].classList.remove('on');
+            // } 길어서 쉽게 써보자 밑에 forEach 써서
+
+            MS_NUM.innerHTML = `<strong>${idx < 10 ? '0' : ''}${idx + 1}</strong> / <span>${total < 10 ? '0' : ''}${total}</span>`;
+            MS_CONTENT.forEach(it => it.classList.remove('on'));
+            MS_CONTENT[idx].classList.add('on');
+        }
+    },
+    navigation: {
+        nextEl: "#mainSolution .arrows li:nth-child(2)",
+        prevEl: "#mainSolution .arrows li:nth-child(1)",
+    },
+    pagination: {
+        el: '#mainSolution .dots',
+        clickable: true,
+    },
+
+}
+const MS_SLIDE = new Swiper('.Ms_slide', MS_SLIDE_OPTION);
