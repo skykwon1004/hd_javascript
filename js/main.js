@@ -185,3 +185,59 @@ const MS_SLIDE_OPTION = {
 
 }
 const MS_SLIDE = new Swiper('.Ms_slide', MS_SLIDE_OPTION);
+
+
+
+//바닐라 자바스크립트로 youtube 쓰기
+var player;
+const Y_OPTION = {
+    height: '100%',
+    width: '100%',
+    videoId: 'raw3Nu0_mBQ',
+}
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('main_movie01', Y_OPTION);
+}
+
+//     function onYouTubeIframeAPIReady() {
+//     player = new YT.Player('player', {
+//         height: '640',
+//         width: '640',
+//         videoId: 'raw3Nu0_mBQ',
+//     });
+
+// pp.onClick = function () {
+//     console.log('btn')
+// }
+
+// const Y_PLAY_BTN = document.querySelector('#pp')
+// const Y_PAUSE_BTN = document.querySelector('#pp2')
+// const Y_PLAY_VIDEO = () => {
+//     console.log('btn');
+//     player.playVideo();
+// }
+// const Y_PAUSE_VIDEO = () => {
+//     console.log('btn');
+//     player.pauseVideo();
+// }
+// Y_PLAY_BTN.addEventListener('click', Y_PLAY_VIDEO);
+// Y_PLAY_BTN.addEventListener('click', Y_PAUSE_VIDEO);
+
+const V_BTN = document.querySelector('.video_btn');
+let SW = true;
+const V_SWITCH = () => {
+    V_BTN.classList.toggle('on')
+    if (SW) {
+        player.playVideo();
+    } else {
+        player.pauseVideo();
+    }
+    SW = !SW;
+    // V_BTN.classList.contains('on') on을 가지고 있으면
+}
+V_BTN.addEventListener('click', V_SWITCH);
+
+// 공부 더 해보기
+//let SW : 전역변수, 전역변수를 지역변수로 가둬서 쓰는 방법이 없을까??? -> 클로져
+//V_SWITCH : 오만데다가 쓰게 만들자
