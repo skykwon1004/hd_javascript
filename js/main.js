@@ -241,3 +241,88 @@ V_BTN.addEventListener('click', V_SWITCH);
 // 공부 더 해보기
 //let SW : 전역변수, 전역변수를 지역변수로 가둬서 쓰는 방법이 없을까??? -> 클로져
 //V_SWITCH : 오만데다가 쓰게 만들자
+
+
+const MOVIE_UL = document.querySelector('#mainMovie .link');
+const UL_CSS = `
+display: flex; 
+gap: 50px; 
+width: 600px; 
+margin: 60px auto 0 auto;
+text-align: center;
+`
+
+MOVIE_UL.style.cssText = UL_CSS;
+
+const MOVIE_LINK = [
+    { title: "IT Technology", desc: "IT 기술이 창조하는 승강기 스마트 시스템" },
+    { title: "Green Technology", desc: "지구환경을 생각하는 녹색기술" },
+];
+
+// MOVIE_UL.innerHTML = '<li>' + MOVIE_LINK[0].title + '</li>';
+// `` 써서 간결하게
+
+// MOVIE_UL.innerHTML = `<li>
+// <strong>${MOVIE_LINK[0].title}</strong>
+// <span>${MOVIE_LINK[0].desc}</span>
+// </li>`;
+
+// for (let i = 0; i < MOVIE_LINK.length; i++) {
+//     MOVIE_UL.innerHTML += `<li>
+//     <strong>${MOVIE_LINK[i].title}</strong>
+//     <span>${MOVIE_LINK[i].desc}</span>
+//     </li>`;
+// }
+// += 쓰는 이유 -> =만 쓰면 뒤에 정보가 덮여서 1개만 나온다 += 하면 두개 다 같이 나옴
+// 일반적인 for문 밑에랑 같은거
+
+
+
+//for문 더 간결하게
+for (it of MOVIE_LINK) {
+    MOVIE_UL.innerHTML += `<li>
+    <strong>${it.title}</strong>
+    <span>${it.desc}</span>
+    </li>`;
+}
+
+const SRTONG = document.querySelectorAll('#mainMovie .link strong');
+
+for (it of SRTONG) {
+    it.style.display = 'block'
+}
+
+
+// console.log([...MOVIE_UL.children][0]);
+[...MOVIE_UL.children][0].classList.add('on');
+
+const MOVIE_UL_TOGGLE = e => {
+    //전체 li에서 class를 떼고, click한 거에 class를 붙이기
+    //click한 거에 번호 가져오기
+    let idx = [...MOVIE_UL.children].indexOf(e.target.parentElement);
+    console.log(idx);
+    
+    for (it of [...MOVIE_UL.children]) {
+        it.classList.remove('on');
+    }; 
+    [...MOVIE_UL.children][idx].classList.add('on');
+}
+
+MOVIE_UL.addEventListener('click', MOVIE_UL_TOGGLE);
+
+
+
+
+
+
+//버튼 클릭했을때 글자 나오게 하기
+// const 나오기 = () => {
+//     for (it of MOVIE_LINK) {
+//         MOVIE_UL.innerHTML += `<li>
+//         <strong>${it.title}</strong>
+//         <span>${it.desc}</span>
+//         </li>`;
+//     }
+// }
+
+// btn_na.onclick = 나오기;

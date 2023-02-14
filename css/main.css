@@ -1,5 +1,6 @@
 :root {
     --mc: #008850;
+    --sc: #00e085;
 }
 
 /* 익스플로러에는 안돌아감 */
@@ -605,4 +606,91 @@ body {
     font-size: 0;
     border-radius: 50%;
     border: 10px solid rgba(255, 255, 255, 0.2);
+}
+
+#mainMovie .link>li {
+    position: relative;
+    flex: 1;
+}
+
+#mainMovie .link>li:nth-child(1)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -35px;
+    transform: translate(0, -50%);
+    width: 2px;
+    height: 15px;
+    background: #fff;
+}
+
+#mainMovie .link>li.on::after {
+    height: 20px;
+    background: var(--sc);
+}
+
+#mainMovie .link>li:nth-child(2)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translate(0, -50%);
+    width: 2px;
+    height: 15px;
+    background: #fff;
+}
+
+#mainMovie .link strong {
+    color: var(--sc);
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+#mainMovie .link span {
+    color: #fff;
+}
+
+
+/* mainNews */
+#mainNews .inner {
+    display: flex;
+    gap: 30px;
+}
+
+#mainNews .inner figure {
+    flex: 1;
+}
+
+#mainNews .inner figure:hover strong {
+    text-decoration: underline;
+}
+
+#mainNews .inner figure img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 0 30px 0;
+}
+
+#mainNews .inner span {
+    display: block;
+    margin: 0 0 20px 0;
+    color: var(--mc);
+}
+
+#mainNews .inner strong {
+    display: block;
+    margin: 0 0 20px 0;
+    font-size: 22px;
+    font-weight: 500;
+    word-break: keep-all;
+    min-height: 75px;
+    line-height: 26px;
+}
+
+#mainNews .inner em {
+    display: block;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 300;
 }
