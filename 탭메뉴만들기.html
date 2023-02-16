@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu>li.on {
+            color: red;
+        }
+
+        .con>li {
+            display: none;
+        }
+
+        .con>li.on {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="menu">
+        <li class="on">menu01</li>
+        <li>menu02</li>
+        <li>menu03</li>
+    </ul>
+    <ul class="con">
+        <li class="on">con01</li>
+        <li>con02</li>
+        <li>con03</li>
+    </ul>
+
+    <script>
+        //번호만 나오면 뭐든지 만들 수 있다고 한다
+        //$(this).index() 제이퀴리에 있는 인덱스를 가져오는 방법
+        //nodeList, htmlCollection 유사배열 .children
+
+        const UL = document.querySelector('.menu');
+        const MENU = document.querySelectorAll('.menu>li');
+        const CON = document.querySelectorAll('.con>li');
+
+        console.log(
+            MENU,
+            UL.children,
+            ...UL.children,
+            [...UL.children],
+            CON,
+            CON[0],
+        );
+
+        // MENU의 li를 클릭했을 때 그 번호를 가져오기
+        //const 번호가져오기 = (e) => {
+        //        //화살표함수는 this가 없다 e.target쓰자 /  function을 쓰면 this 쓸수있음
+        //        //const 번호 = [...MENU].indexOf(this);
+        //     const 번호 = [...MENU].indexOf(e.target);
+        //     // console.log('번호 : ', this, 번호); //0, 1, 2
+        //     for (let i = 0; i < CON.length; i++) {
+        //         CON[i].classList.remove('on');
+        //     }
+        //     CON[번호].classList.add('on');
+        // }
+
+        // for (let i = 0; i < MENU.length; i++) {
+        //     //0 1 2
+        //     MENU[i].addEventListener('click', 번호가져오기)
+        // }
+
+
+
+
+        //forEach 라는 메소드는 번호를 아주 쉽게 반환한다
+        MENU.forEach((it, idx) => {
+            it.addEventListener('click', () => {
+                //console.log(idx)
+                //클릭할때 글자 빨갛게
+                MENU.forEach(it => it.classList.remove('on'));
+                it.classList.add('on');
+
+                CON.forEach(it => it.classList.remove('on'));
+                //it은 MENU자체를 순회하면서
+                //()=> 함수는 앞메 함수가 ex)it 하나면 ()도 생략가능
+                CON[idx].classList.add('on');
+            })
+        })
+        //addEventListener ('click',console.log(idx)) 이렇게 해버리면
+        //addEventListener 괄호 안에 괄호를 넣으면 클릭하기전에 실행해버림 그래서 function넣어줌
+
+
+
+
+
+        //제이쿼리로 했을때
+        // $('.menu>li').on('click', function () {
+        //     var idx = $(this).index();
+        //     $(this).addClass('on').siblings().removeClass('on');
+        //     $('.con>li').eq(idx).addClass('on').siblings().removeClass('on');
+        // });
+    </script>
+</body>
+
+</html>

@@ -245,11 +245,11 @@ V_BTN.addEventListener('click', V_SWITCH);
 
 const MOVIE_UL = document.querySelector('#mainMovie .link');
 const UL_CSS = `
-display: flex; 
-gap: 50px; 
-width: 600px; 
-margin: 60px auto 0 auto;
-text-align: center;
+    display: flex; 
+    gap: 50px; 
+    width:600px; 
+    margin: 60px auto 0 auto;
+    text-align: center;
 `
 
 MOVIE_UL.style.cssText = UL_CSS;
@@ -301,19 +301,14 @@ const MOVIE_UL_TOGGLE = e => {
     //click한 거에 번호 가져오기
     let idx = [...MOVIE_UL.children].indexOf(e.target.parentElement);
     console.log(idx);
-    
+
     for (it of [...MOVIE_UL.children]) {
         it.classList.remove('on');
-    }; 
+    };
     [...MOVIE_UL.children][idx].classList.add('on');
 }
 
 MOVIE_UL.addEventListener('click', MOVIE_UL_TOGGLE);
-
-
-
-
-
 
 //버튼 클릭했을때 글자 나오게 하기
 // const 나오기 = () => {
@@ -326,3 +321,40 @@ MOVIE_UL.addEventListener('click', MOVIE_UL_TOGGLE);
 // }
 
 // btn_na.onclick = 나오기;
+
+
+
+
+
+
+// footer .t_right li a click 일단 a 자체의 이벤트(새로고침)를 막고, 
+// 전체 li에서는 on을 지우고
+// 내 위에 부모에다가 class on을 붙인다
+
+const T_RIGHT = document.querySelectorAll('#footer .t_right li>a');
+const T_RIGHT_BTN = document.querySelectorAll('#footer .t_right button');
+
+console.log(T_RIGHT, T_RIGHT_BTN);
+
+T_RIGHT_BTN.forEach(it => {
+    it.addEventListener('click', () => {
+        it.closest('li').classList.remove('on');
+        //it.parentElement.parentElement.classList.remove('on');
+    });
+});
+
+const R_TAB = (it, idx) => {
+    // T_RIGHT.forEach(it => it.classList.remove('on'));
+    // it.classList.add('on');
+    // console.log(it, idx, it.parentElement);
+    T_RIGHT.forEach(it => it.parentElement.classList.remove('on'));
+    it.parentElement.classList.add('on');
+}
+
+T_RIGHT.forEach((it, idx) => {
+    it.addEventListener('click', e => {
+        e.preventDefault();
+        R_TAB(it, idx);
+    });
+})
+
