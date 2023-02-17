@@ -569,6 +569,7 @@ body {
     background: #008850;
     padding-top: 56.25%;
 }
+
 /* 동영상 비율은 16:9 */
 
 .movie_case iframe {
@@ -781,4 +782,34 @@ body {
 
 #footer .t_right li.on>a::after {
     display: none;
+}
+
+
+/* toTop */
+#toTop {
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    z-index: 1000;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+    cursor: none;
+}
+
+/* opacity만 쓰면 투명만해서 클릭이벤트 실행됨 
+ visibility같이 쓰면 이벤트 실행x / 공간은 살아있음 */
+
+#toTop.on {
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+
+#toTop i {
+    padding: 20px;
+    background: var(--mc);
+    color: #fff;
+    font-size: 30px;
 }

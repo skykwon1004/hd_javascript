@@ -358,3 +358,36 @@ T_RIGHT.forEach((it, idx) => {
     });
 })
 
+
+
+
+
+//toTop
+const TO_TOP = document.querySelector('#toTop');
+const BODY = document.querySelector('html, body');
+//윈도우가 500정도 스크롤 되었을 때 버튼이 나오고 아니면 들어가게
+
+console.log(window);
+const TOGGLE_TOP_BTN = () => {
+    console.log('스크롤값', window.scrollY);
+    const SCT = window.scrollY;
+    // if (SCT > 500) {
+    //     TO_TOP.classList.add('on');
+    // } else {
+    //     TO_TOP.classList.remove('on');
+    // } 밑에 꺼랑 같음 간다하게 쓰면 밑에꺼
+    SCT > 500
+        ? TO_TOP.classList.add('on')
+        : TO_TOP.classList.remove('on')
+}
+window.addEventListener('scroll', TOGGLE_TOP_BTN);
+
+
+const WINDOW_TOP = () => {
+    console.log('찍');
+    //$('html, body').animate({scrollTop:0}, 1000); 제이쿼리
+    //BODY.scrollTo({ top: 0, behavior: "smooth" });
+    gsap.to(window, { duration: 0.5, scrollTo: 0 });
+    // https://greensock.com/products/gsap-plugins/scrolltoplugin/ 참고
+}
+TO_TOP.addEventListener('click', WINDOW_TOP)
